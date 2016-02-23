@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="cache-control" content="public">
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<meta name="KEYWORDS" content="weather georeferenced information lookup compact">
+		<meta name="DESCRIPTION" content="A small service for looking up the weather, time and various other stats for any location on Earth.">
+		<link rel="icon" type="image/png" href="favicon.png">
+		<!--[if IE]><link href="favicon.ico" rel="shortcut icon" type="image/x-icon"><![endif]--><!-- Internet Exploder-->
+		<title>How is...</title>
+		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="//cdn.rawgit.com/monkeecreate/jquery.simpleWeather/master/jquery.simpleWeather.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+		<script>
+			var json;
+			var placeName;
+			var placeLat;
+			var placeLong;
+			
+			function getData(searchTerm) {
+				$.get( "http://api.geonames.org/searchJSON?q="+encodeURIComponent(searchTerm)+"&maxRows=1&fuzzy=0.8&username=space", function(data) {
+					console.log(data);
+					json = data;
+					console.log(encodeURIComponent(searchTerm));
+					if(data.geonames.length > 0) {
+						placeName = data.geonames[0].name;
+						placeLat = data.geonames[0].lat;
+						placeLong = data.geonames[0].lng;
+						console.log(placeName+","+placeLat+","+placeLong);
+						loadWeather(placeLat+','+placeLong);
+						document.title = "How is "+searchTerm+"?";
+					} else {
+						console.log("No results.");
+						document.title = "How is...";
+					}
+				});
+			}
+			
+			$(document).ready(function() {
+				loadWeather('Seattle','');
+				if ("geolocation" in navigator) {
+					$('.js-geolocation').show(); 
+				} else {
+					$('.js-geolocation').hide();
+				}
+				$('.js-geolocation').on('click', function() {
+					navigator.geolocation.getCurrentPosition(function(position) {
+						loadWeather(position.coords.latitude+','+position.coords.longitude);
+					});
+				});
+				$('input.searchField').keyup(function (event) {
+					var key = event.keyCode || event.which;
+					if (key === 13) {
+						getData(document.querySelector("input.searchField").value);
+						document.querySelector("input.searchField").value = "";
+					}
+				});
+			});
+
+			function loadWeather(location, woeid) {
+				$.simpleWeather({
+					location: location,
+					woeid: woeid,
+					unit: 'c',
+					success: function(weather) {
+						html = '<div class="dataContainer"><span class="dataDescription">weather.title:</span><span class="weatherData">'+weather.title+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.temp:</span><span class="weatherData">'+weather.temp+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.code:</span><span class="weatherData">'+weather.code+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.todayCode:</span><span class="weatherData">'+weather.todayCode+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.currently:</span><span class="weatherData">'+weather.currently+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.high:</span><span class="weatherData">'+weather.high+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.low:</span><span class="weatherData">'+weather.low+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.text:</span><span class="weatherData">'+weather.text+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.humidity:</span><span class="weatherData">'+weather.humidity+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.pressure:</span><span class="weatherData">'+weather.pressure+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.rising:</span><span class="weatherData">'+weather.rising+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.visbility:</span><span class="weatherData">'+weather.visibility+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.sunrise:</span><span class="weatherData">'+weather.sunrise+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.sunset:</span><span class="weatherData">'+weather.sunset+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.city:</span><span class="weatherData">'+weather.city+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.country:</span><span class="weatherData">'+weather.country+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.region:</span><span class="weatherData">'+weather.region+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.updated:</span><span class="weatherData">'+weather.updated+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.link:</span><span class="weatherData">'+weather.link+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.heatindex:</span><span class="weatherData">'+weather.heatindex+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.thumbnail:</span><span class="weatherData">'+weather.thumbnail+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.image:</span><span class="weatherData">'+weather.image+'</span></div>';
+
+						html += '<div class="dataContainer"><span class="dataDescription">weather.units.temp:</span><span class="weatherData">'+weather.units.temp+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.units.distance:</span><span class="weatherData">'+weather.units.distance+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.units.pressure:</span><span class="weatherData">'+weather.units.pressure+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.units.speed:</span><span class="weatherData">'+weather.units.speed+'</span></div>';
+
+						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.chill:</span><span class="weatherData">'+weather.wind.chill+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.direction:</span><span class="weatherData">'+weather.wind.direction+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.speed:</span><span class="weatherData">'+weather.wind.speed+'</span></div>';
+
+						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.temp:</span><span class="weatherData">'+weather.alt.temp+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.high:</span><span class="weatherData">'+weather.alt.high+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.low:</span><span class="weatherData">'+weather.alt.low+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.unit:</span><span class="weatherData">'+weather.alt.unit+'</span></div>';
+
+						for(var i=0;i<weather.forecast.length;i++) {
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].date:</span><span class="weatherData">'+weather.forecast[i].date+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].day:</span><span class="weatherData">'+weather.forecast[i].day+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].code:</span><span class="weatherData">'+weather.forecast[i].code+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].high:</span><span class="weatherData">'+weather.forecast[i].high+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].low:</span><span class="weatherData">'+weather.forecast[i].low+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].alt.high:</span><span class="weatherData">'+weather.forecast[i].alt.high+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].alt.low:</span><span class="weatherData">'+weather.forecast[i].alt.low+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].thumbnail:</span><span class="weatherData">'+weather.forecast[i].thumbnail+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].image:</span><span class="weatherData">'+weather.forecast[i].image+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].text:</span><span class="weatherData">'+weather.forecast[i].text+'</span></div>';
+						}
+
+						/* html += '<div class="dataContainer"><span class="dataDescription">weather.description:</span><span class="weatherData">'+weather.description+'</span></div>'; */
+
+						$("#weather").html(html);
+					},
+					error: function(error) {
+						$("#weather").html('<p>'+error.message+'</p>');
+					}
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div class="navHeader">
+			<input class="searchField" type="text" placeholder="...where and when?"></input>
+			<button class="js-geolocation" style="display: none;">...here and now?</button>
+		</div>
+		<div class="outputContainer">
+			<div id="weather"></div>
+		</div>
+		<div class="footer"></div>
+		<script>
+			var _gaq=[['_setAccount','UA-33754219-1'],['_trackPageview']];
+			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+			s.parentNode.insertBefore(g,s)}(document,'script'));
+		</script>
+	</body>
+</html>
