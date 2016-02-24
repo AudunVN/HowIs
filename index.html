@@ -73,53 +73,53 @@
 						dataReady();
 						html = '<div class="infoHeader"><h3>Current data ('+weather.updated+')</h3></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.title:</span><span class="weatherData">'+weather.title+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.temp:</span><span class="weatherData">'+weather.temp+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.temp:</span><span class="weatherData">'+weather.temp+'&deg;'+weather.units.temp+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.code:</span><span class="weatherData">'+weather.code+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.todayCode:</span><span class="weatherData">'+weather.todayCode+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.currently:</span><span class="weatherData">'+weather.currently+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.high:</span><span class="weatherData">'+weather.high+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.low:</span><span class="weatherData">'+weather.low+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.high:</span><span class="weatherData">'+weather.high+'&deg;'+weather.units.temp+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.low:</span><span class="weatherData">'+weather.low+'&deg;'+weather.units.temp+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.text:</span><span class="weatherData">'+weather.text+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.humidity:</span><span class="weatherData">'+weather.humidity+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.pressure:</span><span class="weatherData">'+weather.pressure+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.humidity:</span><span class="weatherData">'+weather.humidity+'%</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.pressure:</span><span class="weatherData">'+weather.pressure+' '+weather.units.pressure+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.rising:</span><span class="weatherData">'+weather.rising+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.visbility:</span><span class="weatherData">'+weather.visibility+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.visbility:</span><span class="weatherData">'+weather.visibility+' '+weather.units.distance+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.sunrise:</span><span class="weatherData">'+weather.sunrise+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.sunset:</span><span class="weatherData">'+weather.sunset+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.city:</span><span class="weatherData">'+weather.city+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.country:</span><span class="weatherData">'+weather.country+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.region:</span><span class="weatherData">'+weather.region+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.updated:</span><span class="weatherData">'+weather.updated+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.link:</span><span class="weatherData">'+weather.link+'</span></div>';
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.link:</span><span class="weatherData">'+weather.link+'</span></div>';-->
 						html += '<div class="dataContainer"><span class="dataDescription">weather.heatindex:</span><span class="weatherData">'+weather.heatindex+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.thumbnail:</span><span class="weatherData">'+weather.thumbnail+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.image:</span><span class="weatherData">'+weather.image+'</span></div>';
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.thumbnail:</span><span class="weatherData">'+weather.thumbnail+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.image:</span><span class="weatherData">'+weather.image+'</span></div>';-->
 
-						html += '<div class="dataContainer"><span class="dataDescription">weather.units.temp:</span><span class="weatherData">'+weather.units.temp+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.units.distance:</span><span class="weatherData">'+weather.units.distance+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.units.pressure:</span><span class="weatherData">'+weather.units.pressure+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.units.speed:</span><span class="weatherData">'+weather.units.speed+'</span></div>';
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.units.temp:</span><span class="weatherData">'+weather.units.temp+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.units.distance:</span><span class="weatherData">'+weather.units.distance+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.units.pressure:</span><span class="weatherData">'+weather.units.pressure+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.units.speed:</span><span class="weatherData">'+weather.units.speed+'</span></div>';-->
 
-						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.chill:</span><span class="weatherData">'+weather.wind.chill+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.chill:</span><span class="weatherData">'+weather.wind.chill+'&deg;'+weather.units.temp+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.direction:</span><span class="weatherData">'+weather.wind.direction+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.speed:</span><span class="weatherData">'+weather.wind.speed+'</span></div>';
+						html += '<div class="dataContainer"><span class="dataDescription">weather.wind.speed:</span><span class="weatherData">'+weather.wind.speed+' '+weather.units.speed+'</span></div>';
 
-						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.temp:</span><span class="weatherData">'+weather.alt.temp+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.high:</span><span class="weatherData">'+weather.alt.high+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.low:</span><span class="weatherData">'+weather.alt.low+'</span></div>';
-						html += '<div class="dataContainer"><span class="dataDescription">weather.alt.unit:</span><span class="weatherData">'+weather.alt.unit+'</span></div>';
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.alt.temp:</span><span class="weatherData">'+weather.alt.temp+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.alt.high:</span><span class="weatherData">'+weather.alt.high+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.alt.low:</span><span class="weatherData">'+weather.alt.low+'</span></div>';-->
+						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.alt.unit:</span><span class="weatherData">'+weather.alt.unit+'</span></div>';-->
 						
 						for(var i=0;i<weather.forecast.length;i++) {
 							html += '<div class="infoHeader"><h3>Day +'+(i+1)+" ("+weather.forecast[i].day+" "+weather.forecast[i].date+')</h3></div>';
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].date:</span><span class="weatherData">'+weather.forecast[i].date+'</span></div>';
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].day:</span><span class="weatherData">'+weather.forecast[i].day+'</span></div>';
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].code:</span><span class="weatherData">'+weather.forecast[i].code+'</span></div>';
-							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].high:</span><span class="weatherData">'+weather.forecast[i].high+'</span></div>';
-							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].low:</span><span class="weatherData">'+weather.forecast[i].low+'</span></div>';
-							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].alt.high:</span><span class="weatherData">'+weather.forecast[i].alt.high+'</span></div>';
-							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].alt.low:</span><span class="weatherData">'+weather.forecast[i].alt.low+'</span></div>';
-							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].thumbnail:</span><span class="weatherData">'+weather.forecast[i].thumbnail+'</span></div>';
-							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].image:</span><span class="weatherData">'+weather.forecast[i].image+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].high:</span><span class="weatherData">'+weather.forecast[i].high+'&deg;'+weather.units.temp+'</span></div>';
+							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].low:</span><span class="weatherData">'+weather.forecast[i].low+'&deg;'+weather.units.temp+'</span></div>';
+							<!--html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].alt.high:</span><span class="weatherData">'+weather.forecast[i].alt.high+'</span></div>';-->
+							<!--html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].alt.low:</span><span class="weatherData">'+weather.forecast[i].alt.low+'</span></div>';-->
+							<!--html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].thumbnail:</span><span class="weatherData">'+weather.forecast[i].thumbnail+'</span></div>';-->
+							<!--html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].image:</span><span class="weatherData">'+weather.forecast[i].image+'</span></div>';-->
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].text:</span><span class="weatherData">'+weather.forecast[i].text+'</span></div>';
 						}
 
