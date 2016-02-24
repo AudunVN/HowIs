@@ -9,6 +9,7 @@
 		<!--[if IE]><link href="favicon.ico" rel="shortcut icon" type="image/x-icon"><![endif]--><!-- Internet Exploder-->
 		<title>How is...</title>
 		<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Electrolize' rel='stylesheet' type='text/css'>
 		<script src="//cdn.rawgit.com/monkeecreate/jquery.simpleWeather/master/jquery.simpleWeather.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<script>
@@ -36,6 +37,12 @@
 				});
 			}
 			
+			function dataReady() {
+				$('html, body').animate({
+					scrollTop: $(".outputContainer").offset().top
+				}, 300);
+			}
+			
 			$(document).ready(function() {
 				if ("geolocation" in navigator) {
 					$('.js-geolocation').show(); 
@@ -57,11 +64,13 @@
 			});
 
 			function loadWeather(location, woeid) {
+				$("#weather").html('<h2 class="loadingText">loading content...</h2><div class="loader"></div>');
 				$.simpleWeather({
 					location: location,
 					woeid: woeid,
 					unit: 'c',
 					success: function(weather) {
+						dataReady();
 						html = '<div class="dataContainer"><span class="dataDescription">weather.title:</span><span class="weatherData">'+weather.title+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.temp:</span><span class="weatherData">'+weather.temp+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.code:</span><span class="weatherData">'+weather.code+'</span></div>';
@@ -122,16 +131,147 @@
 				});
 			}
 		</script>
+		<style>
+		.navHeader, .footer, .outputContainer {
+			background-color: rgb(63, 63, 63);
+			padding: 1em;
+			margin: 0.5em;
+			text-align: center;
+		}
+		::-webkit-input-placeholder {
+			text-align: center;
+		}
+
+		:-moz-placeholder { /* Firefox 18- */
+			text-align: center;  
+		}
+
+		::-moz-placeholder {  /* Firefox 19+ */
+			text-align: center;  
+		}
+		
+		.loadingText {
+			padding: 0;
+			margin: 0;
+		}
+		
+		:-ms-input-placeholder {  
+			text-align: center; 
+		}
+		.navHeader {
+			margin-top: 4em;
+		}
+		.outputContainer {
+			min-height: 1em;
+		}
+		.footer {
+			margin-bottom: 0em;
+			text-align: center;
+		}
+		body {
+			background: black;
+			padding: 0;
+			margin: 0;
+		}
+		body, button, input {
+			font-family: "Electrolize", sans-serif;
+			text-align: center;
+			color: white;
+		}
+		button, input {
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			width: 100%;
+			font-size: 2em;
+			background-color: gray;
+			border: 0.1em solid lightgray;
+			margin: 0.1em;
+		}
+		.dataContainer, .loader {
+			min-width: 3em;
+			background-color: #808080;
+			width: auto;
+			margin: 1em;
+			border-radius: 2em;
+			position: relative;
+			text-align: center;
+			height: 4em;
+			vertical-align: middle;
+			display: inline-block;
+		}
+		.dataDescription {
+			display: none;
+		}
+		.weatherData {
+			vertical-align: middle;
+			display: table-cell;
+			position: relative;
+			min-width: 3em;
+			left: 50%;
+			transform: translateX(-50%);
+			height: 4em;
+			padding: 0px 0.5em;
+		}
+		.navHeader h1 {
+			padding: 0;
+			margin: 0 auto;
+			display: block;
+			text-align: center;
+			top: 0.4em;
+			position: absolute;
+			left: 0px;
+			right: 0px;
+		}
+		.loader {
+			width: 4em;
+			-webkit-animation:spin 2s linear infinite;
+			-moz-animation:spin 2s linear infinite;
+			animation:spin 2s linear infinite;
+			background-color: transparent;
+			border: 0.15em solid orange;
+			border-radius: 555em;
+		}
+		.loader::after {
+			content: '';
+			width: 0.5em;
+			height: 0.5em;
+			position: absolute;
+			top: 0.65em;
+			left: 0;
+			right: 0;
+			border-radius: 555em;
+			background-color: cyan;
+		}
+		.loader::before {
+			content: "";
+			width: 1em;
+			height: 1em;
+			position: absolute;
+			top: 50%;
+			margin: 0px;
+			left: 50%;
+			border-radius: 555em;
+			background-color: #FFF;
+			transform: translateX(-50%) translateY(-50%);
+		}
+		@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+		@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+		@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+		</style>
 	</head>
 	<body>
-		<div class="navHeader">
-			<input class="searchField" type="text" placeholder="...where and when?"></input>
-			<button class="js-geolocation" style="display: none;">...here and now?</button>
+		<div class="uiContainer">
+			<div class="navHeader">
+				<h1>How is...</h1>
+				<input class="searchField" type="text" placeholder="...where and when?"></input>
+				<button class="js-geolocation" style="display: none;">...here and now?</button>
+			</div>
+			<div class="outputContainer">
+				<div id="weather"><span>Waiting for your input.</span></div>
+			</div>
+			<div class="footer"><span class="credits">powered by simpleWeather.js, Yahoo Weather and GeoNames. 471.no</div>
 		</div>
-		<div class="outputContainer">
-			<div id="weather"></div>
-		</div>
-		<div class="footer"></div>
 		<script>
 			var _gaq=[['_setAccount','UA-33754219-1'],['_trackPageview']];
 			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
