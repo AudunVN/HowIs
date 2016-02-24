@@ -71,7 +71,7 @@
 					unit: 'c',
 					success: function(weather) {
 						dataReady();
-						html = '<div class="infoHeader"><h3>Current data ('+weather.updated+')</h3></div>';
+						html = '<div class="infoHeader"><h3>Current data</h3></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.title:</span><span class="weatherData">'+weather.title+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.temp:</span><span class="weatherData">'+weather.temp+'&deg;'+weather.units.temp+'</span></div>';
 						html += '<div class="dataContainer"><span class="dataDescription">weather.code:</span><span class="weatherData">'+weather.code+'</span></div>';
@@ -110,7 +110,7 @@
 						<!--html += '<div class="dataContainer"><span class="dataDescription">weather.alt.unit:</span><span class="weatherData">'+weather.alt.unit+'</span></div>';-->
 						
 						for(var i=0;i<weather.forecast.length;i++) {
-							html += '<div class="infoHeader"><h3>Day +'+(i+1)+" ("+weather.forecast[i].day+" "+weather.forecast[i].date+')</h3></div>';
+							html += '<div class="infoHeader"><h3>Day +'+(i+1)+'</h3></div>';
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].date:</span><span class="weatherData">'+weather.forecast[i].date+'</span></div>';
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].day:</span><span class="weatherData">'+weather.forecast[i].day+'</span></div>';
 							html += '<div class="dataContainer"><span class="dataDescription">weather.forecast['+i+'].code:</span><span class="weatherData">'+weather.forecast[i].code+'</span></div>';
